@@ -29,6 +29,7 @@ const Input: React.FC<IProps> = ({getInput}) => {
             theme={darcula}
             extensions={[javascript({ jsx: true })]}
             onChange={FilterValue}
+            data-testid="input"
         />
     );
 }

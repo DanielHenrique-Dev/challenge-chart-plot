@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import Footer from '../../components/Footer';
 import Graphic from '../../components/Graphic';
 import Header from '../../components/Header';
@@ -9,6 +10,10 @@ const Home: React.FC = () => {
 
     const [data, setData] = useState<string>('');
 
+    const [submittedData, setSubmittedData] = useState<string>('');
+
+    const [clickEvent, setclickEvent] = useState<boolean>(false);
+
     const getInputValue = (value: string) => {
 
         if(value !== ''){
@@ -16,10 +21,14 @@ const Home: React.FC = () => {
         }
     }
 
+    const getClickEvent = (click: boolean) => {
+        setclickEvent(click);
+    };
+
     useEffect(() => {
+        setSubmittedData(data);
 
-
-    },[data]);
+    },[clickEvent]);
 
     return (
         <Container>
@@ -29,11 +38,11 @@ const Home: React.FC = () => {
                 <Input getInput={getInputValue}/>
 
                 <ChartDiv>
-                    <Graphic data={data}/>                   
+                    <Graphic data={submittedData}/>                   
                 </ChartDiv>
             </Main>
 
-            <Footer />
+            <Footer clickEvent={getClickEvent}/>
         </Container>
     )
 }
