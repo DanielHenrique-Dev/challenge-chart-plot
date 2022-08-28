@@ -10,12 +10,4 @@ describe('Tests in the Input component', () => {
 
         expect(screen.getByTestId('input')).toBeInTheDocument();
     });
-
-    /* it('Check if the component has been rendered', () => {
-        const getInput = jest.fn();
-
-        render(<Input getInput={getInput}/>);
-
-        expect(screen.getByTestId('input')).toBeInTheDocument();
-    }); */
 });
