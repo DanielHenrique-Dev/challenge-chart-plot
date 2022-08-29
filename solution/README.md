@@ -10,13 +10,13 @@ The structuring of the components folder was made to contain the component folde
 
 The project has 4 components which are:
 
--Footer fixed at the bottom of the screen and contains the "GENERATE CHART" button, responsible for initializing the rendering of the graph with the data provided by the user.
+- Footer fixed at the bottom of the screen and contains the "GENERATE CHART" button, responsible for initializing the rendering of the graph with the data provided by the user.
 
--Graphic component responsible for the conversion and graphic visualization of the data provided by the user and error message if the data entered does not meet the established requirements.
+- Graphic component responsible for the conversion and graphic visualization of the data provided by the user and error message if the data entered does not meet the established requirements.
 
--Header fixed at the top of the page containing the title of the web application.
+- Header fixed at the top of the page containing the title of the web application.
 
--Input component responsible for capturing the data provided, I chose the codemirror library to assist the user in entering the data.
+- Input component responsible for capturing the data provided, I chose the codemirror library to assist the user in entering the data.
 
 The pages folder contains the "Home" component responsible for the junction of all the components necessary for the functioning of the web application.
 
