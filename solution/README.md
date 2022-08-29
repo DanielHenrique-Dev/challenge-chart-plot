@@ -1,24 +1,24 @@
 # Solution Explanation
 
-I performed the challenge using the TypeScript language for its advantages, such as error detection during project development and the possibility to include IntelliSense to help with the construction of variables and functions, being a strongly typed language it allows greater performance and productivity when executing.
+I did the challenge using the TypeScript language because it offers many advantages, such as error detection during project development and the ability to include IntelliSense to help with variable and function construction. Since it is a strongly typed language, it allows for higher performance and productivity during execution.
 
-I added the styled-component library to the project to help create and style HTML tags, ease of maintenance and eliminate bugs due to collision of class names.
+I added the Styled Component library to the project to make it easier to create and style HTML tags, simplify maintenance, and avoid errors due to class name collisions.
 
-I chose the project folder structure for the readability and accountability of each part.
+I chose the project folder structure to ensure readability and accountability of each part.
 
-The structuring of the components folder was made to contain the component folder with its 3 index files to contain its logic and return its standard function, styled for the creation and styling of HTML tags with the styled-components library and finally the file of unitary tests.
+The component folder was structured to contain the component folder with its 3 index files to contain its logic and return its default function, styled for creating and styling HTML tags with the styled-components library, and finally the unified tests file.
 
-The project has 4 components which are:
+The project has 4 components that are:
 
-- Footer fixed at the bottom of the screen and contains the "GENERATE CHART" button, responsible for initializing the rendering of the graph with the data provided by the user.
+- Footer is placed at the bottom of the screen and contains the "GENERATE CHART" button, which is responsible for initializing the display of the chart with the data provided by the user.
 
-- Graphic component responsible for the conversion and graphic visualization of the data provided by the user and error message if the data entered does not meet the established requirements.
+- Graphical component, which is responsible for the conversion and graphical representation of the data provided by the user and gives an error message if the data entered does not meet the specified requirements.
 
-- Header fixed at the top of the page containing the title of the web application.
+- Header at the top of the page that contains the title of the web application.
 
-- Input component responsible for capturing the data provided, I chose the codemirror library to assist the user in entering the data.
+- Input component responsible for capturing the provided data. I have chosen the Codemirror library to assist the user in entering the data.
 
-The pages folder contains the "Home" component responsible for the junction of all the components necessary for the functioning of the web application.
+The page folder contains the Home component, which is responsible for connecting all the components required for the web application to work.
 
 
 
