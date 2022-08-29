@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import Graphic from '../../components/Graphic';
 import Header from '../../components/Header';
 import Input from '../../components/Input';
-import { ChartDiv, Container, Main } from './styles';
+import { Container, Main } from './styles';
 
 const Home: React.FC = () => {
 
@@ -15,10 +15,7 @@ const Home: React.FC = () => {
     const [clickEvent, setclickEvent] = useState<boolean>(false);
 
     const getInputValue = (value: string) => {
-
-        if(value !== ''){
-            setData(value);
-        }
+        setData(value);
     }
 
     const getClickEvent = (click: boolean) => {
@@ -36,10 +33,8 @@ const Home: React.FC = () => {
             
             <Main>
                 <Input getInput={getInputValue}/>
-
-                <ChartDiv>
-                    <Graphic data={submittedData}/>                   
-                </ChartDiv>
+                
+                <Graphic data={submittedData}/> 
             </Main>
 
             <Footer clickEvent={getClickEvent}/>

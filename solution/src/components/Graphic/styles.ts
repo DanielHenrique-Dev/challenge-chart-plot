@@ -25,3 +25,7 @@ export const ErrorInProcessing = styled.div`
     background-color: #f8d7da;
     border-color: #f5c6cb;
 `;
+
+export const ChartDiv = styled.div`
+    margin-top: 1em;
+`;

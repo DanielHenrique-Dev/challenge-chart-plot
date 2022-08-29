@@ -18,6 +18,6 @@ describe('Tests in the footer component', () => {
 
         fireEvent.click(screen.getByText("GENERATE CHART"));
 
-        expect(getClickEvent).toBeCalled();
+        expect(getClickEvent).toBeCalled(); 
     });
 });

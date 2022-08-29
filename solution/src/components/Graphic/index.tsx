@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Chart } from "react-google-charts";
-import { DataNotFound, ErrorInProcessing } from './styles';
+import { ChartDiv, DataNotFound, ErrorInProcessing } from './styles';
 
 interface Iprops {
   data: string
@@ -52,13 +52,16 @@ const Graphic: React.FC<Iprops> = (props: Iprops) => {
       };
 
       return (
-              <Chart
-                  chartType="LineChart"
-                  width="80%"
-                  height="400px"
-                  data={processedData.data}
-                  options={options}
-              />
+        <ChartDiv data-testid="chart-container">
+
+          <Chart
+              chartType="LineChart"
+              width="80%"
+              height="400px"
+              data={processedData.data}
+              options={options}
+          />
+        </ChartDiv>
       )
 
     } else {
@@ -86,13 +89,14 @@ const ChartLogic = (data: string): any => {
   var startObject: IstartObject = {timestamp: 0,  select: [], group: []};
   var stopObject: IstopObject = {timestamp: 0};
   var spanObject: IspanObject = {timestamp: 0, begin: 0, end: 0};
-  var dataArray: Array<IdataArray> = [{timestamp: 0, os: '', browser: '', min_response_time: 0, max_response_time: 0}];
+  var dataArray: Array<IdataArray> = [];
   
   //Data control variables inside the loop 
   var arrayTimstamp: Array<number> = [];
   var controllTimestamp: number = 0;
 
-  for (let i = 0; i < arrayData.length; i++) {
+  for (let i = 0; i < arrayData.length; i++) 
+  {
 
     try {
       
@@ -110,11 +114,11 @@ const ChartLogic = (data: string): any => {
           };
         
         //Insert the data into the stop control variable
-        } else if (typeof itemData === 'object' && itemData.type === 'stop') {
+        } else if (itemData.type === 'stop') {
           stopObject = { timestamp: itemData.timestamp };
 
         //Insert the data into the span control variable
-        } else if (typeof itemData === 'object' && itemData.type === 'span') {
+        } else if (itemData.type === 'span') {
           spanObject = {
             timestamp: itemData.timestamp,
             begin: itemData.begin,
@@ -122,9 +126,9 @@ const ChartLogic = (data: string): any => {
           };
 
         //Insert the data into the control variable
-        } else if (typeof itemData === 'object' && itemData.type === 'data') {
+        } else if (itemData.type === 'data') {
 
-          //Check if the data timestamp is similar to the control variable
+          //Check if data timestamp is different to control variable
           if(controllTimestamp !== itemData.timestamp){
 
             //If so, insert the timestamp into the control array
@@ -150,14 +154,19 @@ const ChartLogic = (data: string): any => {
     }
   }
 
-  //Check if the control variable has been changed, if not return the error.
-  if(startObject.timestamp == 0 || stopObject.timestamp == 0 || spanObject.timestamp == 0) {
+  //Check if the control variable has been changed from the default value, if it doesn't return the error.
+  if(startObject.timestamp == 0 || stopObject.timestamp == 0 || spanObject.timestamp == 0 || dataArray.length == 0) {
     return {"status": "error", "data": []}
   } 
 
   var finalData: Array<any> = [];
 
   let TemporaryControlVariable = finalDataConversion(dataArray,startObject, stopObject, spanObject, arrayTimstamp);
+
+  if(TemporaryControlVariable.status == 'error'){
+    return {"status": "error", "data": []}
+  }
+
   for(let i = 0; i < TemporaryControlVariable.data.length; i++)
   {
     finalData.push(TemporaryControlVariable.data[i].value);
@@ -169,10 +178,7 @@ const ChartLogic = (data: string): any => {
 }
 
 //Auxiliary function for data conversion
-function finalDataConversion(dataArray: Array<IdataArray>, startObject: IstartObject, stopObject: IstopObject, spanObject: IspanObject, arrayTimstamp: Array<number>)
-{
-  dataArray.unshift();
-
+const finalDataConversion = (dataArray: Array<IdataArray>, startObject: IstartObject, stopObject: IstopObject, spanObject: IspanObject, arrayTimstamp: Array<number>) => {
   var arrayReturn: Array<any> = [];
 
   //Initializing a return array, inserting the timestamp as a key to access the value.
@@ -194,7 +200,8 @@ function finalDataConversion(dataArray: Array<IdataArray>, startObject: IstartOb
       }   
   }
 
-  for (var i = 0; i < dataArray.length; i++) {
+  for (var i = 0; i < dataArray.length; i++) 
+  {
 
     //Validate if the data timestamp is in accordance with the start and stop control variable
     if (
@@ -222,6 +229,10 @@ function finalDataConversion(dataArray: Array<IdataArray>, startObject: IstartOb
     }
   } 
 
+  if(arrayReturn.length == 0){
+    return {"status": "error", "labels": [], "data": []};
+  }
+
   //Insert the timestamp in Date format at the beginning of the array, to insert it in the graph
   for(var y = 0; y < arrayReturn.length; y++)
   {
@@ -239,7 +250,7 @@ function finalDataConversion(dataArray: Array<IdataArray>, startObject: IstartOb
     }
   }
 
-  return {"labels": arrayLabels, "data": arrayReturn};
+  return {"status": "success","labels": arrayLabels, "data": arrayReturn};
 }
 
 export default Graphic;

@@ -14,8 +14,4 @@ export const Container = styled.section`
     margin-bottom: auto;
 `;
 
-export const Main = styled.main``
-
-export const ChartDiv = styled.div`
-    margin-top: 1em;
-`;
+export const Main = styled.main``;
